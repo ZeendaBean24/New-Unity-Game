@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public float damageCooldown = 2f; // Time in seconds between consecutive damages
 
     private Coroutine damageCoroutine;
+    private float lastDamageTime;
 
     void Start()
     {
@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        lastDamageTime = Time.time; // Update the last damage time
         Debug.Log("Player took damage: " + damage + ", current health: " + currentHealth);
         if (currentHealth <= 0)
         {
@@ -52,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
         {
             if (damageCoroutine == null)
             {
-                damageCoroutine = StartCoroutine(DamageOverTime(other));
+                damageCoroutine = StartCoroutine(DamageOverTime());
             }
         }
     }
@@ -69,12 +70,15 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    IEnumerator DamageOverTime(Collider2D enemy)
+    IEnumerator DamageOverTime()
     {
         while (true)
         {
-            TakeDamage(10); // Adjust the damage value as needed
-            yield return new WaitForSeconds(damageCooldown);
+            if (Time.time - lastDamageTime >= damageCooldown)
+            {
+                TakeDamage(10); // Adjust the damage value as needed
+            }
+            yield return null; // Check every frame
         }
     }
 }

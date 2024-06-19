@@ -12,10 +12,13 @@ public class PlayerHealth : MonoBehaviour
     public float damageCooldown = 2f; // Time in seconds between consecutive damages
     private float lastDamageTime;
 
+    CapsuleCollider2D playerCollider;
+
     void Start()
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
+        playerCollider=GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -56,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && Time.time - lastDamageTime >= damageCooldown)
+        if (collision.gameObject.tag==("Enemy") && Time.time - lastDamageTime >= damageCooldown)
         {
             TakeDamage(10); // Adjust the damage value as needed
         }

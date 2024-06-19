@@ -33,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
         if (healthBarFill != null)
         {
             healthBarFill.fillAmount = (float)currentHealth / maxHealth;
+            // Debug.Log("Health Bar Updated: " + healthBarFill.fillAmount);
         }
     }
 

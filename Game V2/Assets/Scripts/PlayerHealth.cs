@@ -10,25 +10,13 @@ public class PlayerHealth : MonoBehaviour
     public Image healthBarFill;
     public GameOverManager gameOverManager;
     public float damageCooldown = 2f; // Time in seconds between consecutive damages
-    private float lastDamageTime;
 
-    CapsuleCollider2D playerCollider;
+    private Coroutine damageCoroutine;
 
     void Start()
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
-        playerCollider=GetComponent<CapsuleCollider2D>();
-    }
-
-    void Update()
-    {
-        // Check if enough time has passed since the last damage
-        if (Time.time - lastDamageTime >= damageCooldown)
-        {
-            // Reset lastDamageTime to allow taking damage again
-            lastDamageTime = Time.time;
-        }
     }
 
     void UpdateHealthBar()
@@ -36,14 +24,14 @@ public class PlayerHealth : MonoBehaviour
         if (healthBarFill != null)
         {
             healthBarFill.fillAmount = (float)currentHealth / maxHealth;
-            // Debug.Log("Health Bar Updated: " + healthBarFill.fillAmount);
+            Debug.Log("Health Bar Updated: " + healthBarFill.fillAmount);
         }
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        lastDamageTime = Time.time; // Update the last damage time
+        Debug.Log("Player took damage: " + damage + ", current health: " + currentHealth);
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -55,13 +43,38 @@ public class PlayerHealth : MonoBehaviour
     void GameOver()
     {
         gameOverManager.ShowGameOverScreen();
+        Debug.Log("Game Over");
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag==("Enemy") && Time.time - lastDamageTime >= damageCooldown)
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (damageCoroutine == null)
+            {
+                damageCoroutine = StartCoroutine(DamageOverTime(other));
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (damageCoroutine != null)
+            {
+                StopCoroutine(damageCoroutine);
+                damageCoroutine = null;
+            }
+        }
+    }
+
+    IEnumerator DamageOverTime(Collider2D enemy)
+    {
+        while (true)
         {
             TakeDamage(10); // Adjust the damage value as needed
+            yield return new WaitForSeconds(damageCooldown);
         }
     }
 }

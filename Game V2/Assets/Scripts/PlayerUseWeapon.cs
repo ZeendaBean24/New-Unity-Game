@@ -10,6 +10,7 @@ public class PlayerUseWeapon : MonoBehaviour
     private Vector2 mousePos;
     [SerializeField] Camera cam;
     [SerializeField] Rigidbody2D playerRB;
+    [SerializeField] float aimIndicatorDistance = 0.75f;
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class PlayerUseWeapon : MonoBehaviour
         float lookAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         // Rotate the aim indicator around the player
-        aimIndicator.position = currentPlayerPosition + direction.normalized * 1.5f;
+        aimIndicator.position = currentPlayerPosition + direction.normalized * aimIndicatorDistance;
         aimIndicator.rotation = Quaternion.Euler(0, 0, lookAngle - 90);
     }
 }

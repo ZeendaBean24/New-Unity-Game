@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
         if (healthBarFill != null)
         {
             healthBarFill.fillAmount = (float)currentHealth / maxHealth;
-            Debug.Log("Health Bar Updated: " + healthBarFill.fillAmount);
+            // Debug.Log("Health Bar Updated: " + healthBarFill.fillAmount);
         }
     }
 
@@ -32,7 +32,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
         lastDamageTime = Time.time; // Update the last damage time
-        Debug.Log("Player took damage: " + damage + ", current health: " + currentHealth);
+        // Debug.Log("Player took damage: " + damage + ", current health: " + currentHealth);
         if (currentHealth <= 0)
         {
             currentHealth = 0;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e6d61cd5edef449ae6a7bc37942abc, type: 3}
   m_Name: Starter Utility
   m_EditorClassIdentifier: 
-  itemName: 
-  icon: {fileID: 0}
-  damage: 0
-  cooldown: 0
+  itemName: Starter Utility
+  icon: {fileID: 21300000, guid: 57a6e1951475217458e10c032452ccb1, type: 3}
+  damage: 10
+  cooldown: 20

@@ -4,45 +4,89 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+
+    public static Inventory Instance;
+
     public UtilityItem currentUtilityItem;
     public GunItem currentGunItem;
     public MeleeItem currentMeleeItem;
 
+    [SerializeField] GameObject holdPosition;
+
+    PlayerUseWeapon playerUseWeapon;
+
+    [SerializeField] MeleeItem emptyFists;
+    [SerializeField] UtilityItem noUtilState;
+    [SerializeField] GunItem unarmedState;
+
+
     public int currentSlot = 1; // 1: Utility, 2: Gun, 3: Melee
 
-    void Update()
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Instance == null)
         {
-            currentSlot = 1;
-            SwitchItem();
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
-            currentSlot = 2;
-            SwitchItem();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            currentSlot = 3;
-            SwitchItem();
+            Destroy(gameObject);
         }
     }
 
-    void SwitchItem()
+    private void Start()
+    {
+        holdPosition = GameObject.Find("HoldPosition");
+        playerUseWeapon = holdPosition.GetComponent<PlayerUseWeapon>();
+    }
+
+    void Update()
+    {
+        //moved changing slot controls to player movement
+        if(currentMeleeItem == null)
+        {
+            currentMeleeItem = emptyFists;
+        }
+        if (currentGunItem==null)
+        {
+            currentGunItem = unarmedState;
+        }
+        if (currentUtilityItem == null) { 
+            currentUtilityItem = noUtilState;
+        }
+    }
+
+    public void SwitchItem()
     {
         // Implement the logic to switch items based on the current slot
+        playerUseWeapon.holdSpriteRend.transform.localScale = new Vector3(0.2f, 0.2f, 1);
         switch (currentSlot)
         {
             case 1:
-                Debug.Log("Switched to Utility Item: " + currentUtilityItem.itemName);
+                playerUseWeapon.holdSpriteRend.sprite = currentGunItem.icon;
                 break;
             case 2:
-                Debug.Log("Switched to Gun Item: " + currentGunItem.itemName);
+                playerUseWeapon.holdSpriteRend.sprite = currentMeleeItem.icon;
                 break;
             case 3:
-                Debug.Log("Switched to Melee Item: " + currentMeleeItem.itemName);
+                playerUseWeapon.holdSpriteRend.sprite = currentUtilityItem.icon;
                 break;
+        }
+    }
+
+    public void AddItem(GunItem gunItem, MeleeItem meleeItem, UtilityItem utilItem)
+    {
+        if (gunItem != null)
+        {
+            currentGunItem = gunItem;
+        }
+        else if (meleeItem != null) { 
+            currentMeleeItem = meleeItem;
+        }
+        else if (utilItem != null)
+        {
+            currentUtilityItem=utilItem;
         }
     }
 }

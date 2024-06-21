@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         Run();
         FlipSprite();
         CheckRunStatus();
+        changeSlot();
     }
 
     void OnMove(InputValue value)
@@ -96,6 +97,35 @@ public class PlayerMovement : MonoBehaviour
             {
                 ableRun = true;
             }
+        }
+    }
+
+    void changeSlot()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Inventory.Instance.currentSlot = 1;
+            Inventory.Instance.SwitchItem();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Inventory.Instance.currentSlot = 2;
+            Inventory.Instance.SwitchItem();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Inventory.Instance.currentSlot = 3;
+            Inventory.Instance.SwitchItem();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "UsableItem")
+        {
+            ItemController itemController = collision.GetComponent<ItemController>();
+            Inventory.Instance.AddItem(itemController.gunItem, itemController.meleeItem, itemController.utilItem);
+            Destroy(collision.gameObject);
         }
     }
 }

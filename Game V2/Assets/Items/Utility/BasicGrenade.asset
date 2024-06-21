@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd2e520256fb89645a1059e742654bd2, type: 3}
-  m_Name: Starter Gun
+  m_Script: {fileID: 11500000, guid: 21e6d61cd5edef449ae6a7bc37942abc, type: 3}
+  m_Name: BasicGrenade
   m_EditorClassIdentifier: 
-  itemName: Starter Gun
-  icon: {fileID: 21300000, guid: 3af24133a2ebbeb419b6682f5c7a7ed5, type: 3}
-  damage: 5
-  ammo: 20
-  fireRate: 1
+  itemName: BasicGrenade
+  icon: {fileID: 21300000, guid: 57a6e1951475217458e10c032452ccb1, type: 3}
+  damage: 10
+  cooldown: 20

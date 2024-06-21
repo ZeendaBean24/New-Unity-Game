@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     Rigidbody2D playerRB;
     CapsuleCollider2D playerCollider;
     Vector2 playerInputValue;
+    Vector3 originalScale; // Store the original scale
 
-    [SerializeField] float walkSpeed = 3f, sprintSpeed=8f;
+    [SerializeField] float walkSpeed = 3f, sprintSpeed = 8f;
 
-    //sprinting stuff
-    [SerializeField] float sprintTimer=3f;
+    // Sprinting stuff
+    [SerializeField] float sprintTimer = 3f;
     float sprintMax = 3f;
     bool ableRun = true, running = false;
     [SerializeField] Slider staminBar;
@@ -25,12 +25,13 @@ public class PlayerMovement : MonoBehaviour
         staminBar.value = sprintMax;
         playerRB = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
+        originalScale = transform.localScale; // Save the original scale
     }
 
     // Update is called once per frame
     void Update()
     {
-        staminBar.value=sprintTimer;
+        staminBar.value = sprintTimer;
         Run();
         FlipSprite();
         CheckRunStatus();
@@ -44,32 +45,31 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
-
-        //sprint conditions
-        if (Input.GetKeyDown(KeyCode.LeftShift)&&ableRun)
+        // Sprint conditions
+        if (Input.GetKeyDown(KeyCode.LeftShift) && ableRun)
         {
-            walkSpeed=sprintSpeed;
-            running= true;
+            walkSpeed = sprintSpeed;
+            running = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            walkSpeed=3f;
+            walkSpeed = 3f;
             ableRun = false;
-            running=false;
+            running = false;
         }
 
-        Vector2 playerVector = new Vector2(playerInputValue.x*walkSpeed, playerInputValue.y*walkSpeed);
-        playerRB.velocity=playerVector;
+        Vector2 playerVector = new Vector2(playerInputValue.x * walkSpeed, playerInputValue.y * walkSpeed);
+        playerRB.velocity = playerVector;
     }
 
     void FlipSprite()
     {
-
-        bool playerMoving=Mathf.Abs(playerRB.velocity.x)>Mathf.Epsilon;
+        bool playerMoving = Mathf.Abs(playerRB.velocity.x) > Mathf.Epsilon;
 
         if (playerMoving)
         {
-            transform.localScale = new Vector2(Mathf.Sign(playerRB.velocity.x), 1f);
+            // Maintain the original scale while flipping the sprite
+            transform.localScale = new Vector3(Mathf.Sign(playerRB.velocity.x) * originalScale.x, originalScale.y, originalScale.z);
         }
     }
 

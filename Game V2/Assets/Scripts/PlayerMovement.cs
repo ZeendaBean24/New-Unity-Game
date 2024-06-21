@@ -19,16 +19,12 @@ public class PlayerMovement : MonoBehaviour
     bool ableRun = true, running = false;
     [SerializeField] Slider staminBar;
 
-    [SerializeField]GameObject holdPosition;
-
     // Start is called before the first frame update
     void Start()
     {
         staminBar.value = sprintMax;
         playerRB = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
-        holdPosition = GameObject.Find("HoldPosition");
-        PlayerUseWeapon playerUseWeapon=holdPosition.GetComponent<PlayerUseWeapon>();
     }
 
     // Update is called once per frame

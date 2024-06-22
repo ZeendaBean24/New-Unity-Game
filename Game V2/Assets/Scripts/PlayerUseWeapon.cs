@@ -12,6 +12,10 @@ public class PlayerUseWeapon : MonoBehaviour
     [SerializeField] Rigidbody2D playerRB;
     [SerializeField] float aimIndicatorDistance = 0.75f;
 
+    [SerializeField] GameObject smallBullet;
+
+    GameObject bulletShot;
+
     void Start()
     {
         holdSpriteRend = GetComponent<SpriteRenderer>();
@@ -26,6 +30,7 @@ public class PlayerUseWeapon : MonoBehaviour
             holdSpriteRend.sprite = temporaryRifle;
         }*/
         AimItem();
+        usingItem();
     }
 
     void AimItem()
@@ -38,5 +43,20 @@ public class PlayerUseWeapon : MonoBehaviour
         // Rotate the aim indicator around the player
         aimIndicator.position = currentPlayerPosition + direction.normalized * aimIndicatorDistance;
         aimIndicator.rotation = Quaternion.Euler(0, 0, lookAngle - 90);
+    }
+
+    void usingItem()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Inventory.Instance.currentSlot == 1)
+            {
+                if (Inventory.Instance.currentGunItem.ammoType == "small")
+                {
+                    bulletShot=smallBullet;
+                    Inventory.Instance.currentGunItem.shootGun(bulletShot, playerRB, aimIndicator);
+                }
+            }
+        }
     }
 }

@@ -17,3 +17,4 @@ MonoBehaviour:
   damage: 5
   ammo: 20
   fireRate: 1
+  ammoType: small

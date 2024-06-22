@@ -3122,6 +3122,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1135892176}
+    - target: {fileID: 4568405367285175066, guid: f9218234621a9a84aa8745d56bc2cc09, type: 3}
+      propertyPath: smallBullet
+      value: 
+      objectReference: {fileID: 839372037202630345, guid: 4ff074f4ec2150e408ceb008040ec83c, type: 3}
     - target: {fileID: 9219286448724377382, guid: f9218234621a9a84aa8745d56bc2cc09, type: 3}
       propertyPath: m_Name
       value: Player

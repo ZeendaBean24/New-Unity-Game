@@ -351,6 +351,7 @@ MonoBehaviour:
   sprintSpeed: 8
   sprintTimer: 3
   staminBar: {fileID: 0}
+  smallBullet: {fileID: 839372037202630345, guid: 4ff074f4ec2150e408ceb008040ec83c, type: 3}
 --- !u!114 &830059677090363581
 MonoBehaviour:
   m_ObjectHideFlags: 0

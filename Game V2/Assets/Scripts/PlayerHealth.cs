@@ -41,6 +41,18 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthBar();
     }
 
+    public void RestoreHealth(int health)
+    {
+        currentHealth += health;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        UpdateHealthBar();
+        Debug.Log("Health Restored: " + health + ", current health: " + currentHealth);
+    }
+
+
     void GameOver()
     {
         gameOverManager.ShowGameOverScreen();

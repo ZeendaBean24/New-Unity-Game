@@ -5,36 +5,29 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage = 10;
-    private PlayerXP playerXP;
+    public float lifespan = 5f; // Time in seconds before the bullet is destroyed
 
-    void Start()
+    private void Start()
     {
-        // Find the player GameObject and get the PlayerXP component
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            playerXP = player.GetComponent<PlayerXP>();
-        }
+        Destroy(gameObject, lifespan);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
-            // Damage the enemy
-            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+            EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
                 enemyHealth.EnemyTakeDamage(damage);
             }
 
-            // Award XP to the player
+            PlayerXP playerXP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerXP>();
             if (playerXP != null)
             {
                 playerXP.AddXP(10);
             }
 
-            // Destroy the bullet
             Destroy(gameObject);
         }
     }

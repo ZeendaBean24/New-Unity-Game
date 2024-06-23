@@ -5,7 +5,7 @@ using UnityEngine;
 
 public interface gunInterface
 {
-    void shootGun(GameObject bulletPrefab,Rigidbody2D playerRb, Transform aiming);
+    void shootGun(GameObject bulletPrefab, Rigidbody2D playerRb, Transform aiming);
 }
 
 public abstract class BaseGun : ScriptableObject, gunInterface
@@ -25,9 +25,9 @@ public class GunItem : BaseGun
 {
     public override void shootGun(GameObject bulletPrefab, Rigidbody2D playerRb, Transform aiming)
     {
-        GameObject newBullet=Instantiate(bulletPrefab, playerRb.transform.position,aiming.rotation);
+        GameObject newBullet = Instantiate(bulletPrefab, playerRb.transform.position, aiming.rotation);
 
-        Rigidbody2D bulletRb=newBullet.GetComponent<Rigidbody2D>();
+        Rigidbody2D bulletRb = newBullet.GetComponent<Rigidbody2D>();
         bulletRb.AddForce(aiming.transform.up * 20f, ForceMode2D.Impulse);
     }
 }

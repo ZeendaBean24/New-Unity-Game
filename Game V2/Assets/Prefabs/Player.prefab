@@ -186,6 +186,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   playerRB: {fileID: 6660532757059037848}
   aimIndicatorDistance: 0.75
+  smallBullet: {fileID: 839372037202630345, guid: 4ff074f4ec2150e408ceb008040ec83c, type: 3}
 --- !u!1 &9219286448724377382
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +202,7 @@ GameObject:
   - component: {fileID: 696980012850210230}
   - component: {fileID: 830059677090363581}
   - component: {fileID: 4902309596626127069}
-  - component: {fileID: 3713536670825985616}
+  - component: {fileID: 2267300573039697705}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -351,7 +352,6 @@ MonoBehaviour:
   sprintSpeed: 8
   sprintTimer: 3
   staminBar: {fileID: 0}
-  smallBullet: {fileID: 839372037202630345, guid: 4ff074f4ec2150e408ceb008040ec83c, type: 3}
 --- !u!114 &830059677090363581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &3713536670825985616
+--- !u!114 &2267300573039697705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,6 +413,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 9219286448724377382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc5439f16e6b8944da34c6baa3fb1701, type: 3}
+  m_Script: {fileID: 11500000, guid: 07f8540f37b687247811b98e16ae294c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

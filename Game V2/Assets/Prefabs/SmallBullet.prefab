@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6823244565633540283}
   - component: {fileID: 4544742819816110616}
   - component: {fileID: 8725793666590425906}
+  - component: {fileID: 6084654178661002250}
   m_Layer: 0
   m_Name: SmallBullet
   m_TagString: Untagged
@@ -158,3 +159,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &6084654178661002250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839372037202630345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ded750b9a44a04ca6ecebb09c7c4f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
